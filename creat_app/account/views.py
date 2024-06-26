@@ -26,8 +26,16 @@ def login(request):
         username = request.POST.get("username")
         password = request.POST.get("password")
         return HttpResponse(f"用户{username}的密码是{password}。")
+    elif request.method == "GET":
+        forbiden_ip = ["127.0.0.1"]
+        print(request.META.get('HTTP_USER_AGENT')) #使用request.META.get('') 获取所有的参数，根据返回结果查看参数
+        # if request.META.get('REMOTE_ADDR') in forbiden_ip :  #当请求此网址的客户端ip在禁止列表时，返回ip禁用提示。
+        #     return HttpResponse("ip被禁用，请求异常")
+        if 'python' in request.META.get('HTTP_USER_AGENT'): #当检测到user agent为python时，返回禁用爬虫提示。
+            return HttpResponse("禁止爬虫")  #当然这个判断需要使用python爬虫使用get爬取此网址（127.0.0.1：8000/account/login），且未使用user agent伪装的条件下才能起效。
 
-    return render(request,"index.html")
+
+        return render(request,"index.html")
 
 
 
