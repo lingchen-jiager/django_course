@@ -18,11 +18,13 @@ from django.contrib import admin
 from django.urls import path,re_path,include
 from app01.views import helloworld
 
+
 urlpatterns = [
 path('hello/', helloworld),
     path('', helloworld),
     path('admin/', admin.site.urls),
-    path("article/",include("app01.urls"))
+    path("article/",include("app01.urls")),
+    path("account/",include("account.urls"))
     # path('hello/', helloworld),
 
 ]
