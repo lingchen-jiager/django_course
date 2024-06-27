@@ -5,6 +5,7 @@ from django.http import HttpResponse
 def helloworld(request):
     return HttpResponse("hello world")
 def article_create(request):
+
     return HttpResponse("创建一篇新文章")
 
 def article_detail(request,article_id,article_title): # article_id是urls.py中定义路由时的name

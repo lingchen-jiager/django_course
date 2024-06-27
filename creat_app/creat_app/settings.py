@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'account'
 ]
 
 MIDDLEWARE = [
@@ -54,8 +55,8 @@ ROOT_URLCONF = 'creat_app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["templates"],
-        'APP_DIRS': True,
+        'DIRS': ["templates"], #这里是故意删掉一个s，假设这里加上s，则全局方式设置的模板和在installed_app中设置的模板有同名时(比如都有index.html)，则以全局方式为优先，
+        'APP_DIRS': True, #这里设置为真，允许在应用内设置网页模板。
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',

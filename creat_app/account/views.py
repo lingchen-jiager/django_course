@@ -43,7 +43,7 @@ def login(request):
             return HttpResponse("禁止爬虫")  #当然这个判断需要使用python爬虫使用get爬取此网址（127.0.0.1：8000/account/login），且未使用user agent伪装的条件下才能起效。
 
 
-        return render(request,"index.html")
+        return render(request,"index1.html")
 
 
 
