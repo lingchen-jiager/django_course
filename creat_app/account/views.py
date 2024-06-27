@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from django.views import View
 
 
@@ -25,8 +25,16 @@ def login(request):
     if request.POST:
         username = request.POST.get("username")
         password = request.POST.get("password")
-        return HttpResponse(f"用户{username}的密码是{password}。")
+        headers = {"token":"123456"}
+        res = {"status":200,
+               "message":"ok",
+               "username":username,
+               "password":password,
+               }
+        # return HttpResponse(f"用户{username}的密码是{password}。",headers=headers,content_type="text/html;charset=utf-8")
+        return JsonResponse(data=res,headers=headers,content_type="application/json; charset=utf-8",json_dumps_params={'ensure_ascii':False}) #若json中含有中文数据，则会在浏览器端以/u6797的方式显示，添加json_dumps_params={'ensure_ascii':False}即可正常显示中文
     elif request.method == "GET":
+
         forbiden_ip = ["127.0.0.1"]
         print(request.META.get('HTTP_USER_AGENT')) #使用request.META.get('') 获取所有的参数，根据返回结果查看参数
         # if request.META.get('REMOTE_ADDR') in forbiden_ip :  #当请求此网址的客户端ip在禁止列表时，返回ip禁用提示。
